@@ -1,18 +1,13 @@
-%{!?__python_ver:%global __python_ver EMPTY}
-#global __python_ver 26
+%global __python_ver 26
 %global unicode ucs4
 
 %global _default_patch_fuzz 2
 
-%if "%{__python_ver}" != "EMPTY"
+
 %global main_python 0
 %global python python%{__python_ver}
 %global tkinter tkinter%{__python_ver}
-%else
-%global main_python 1
-%global python python
-%global tkinter tkinter
-%endif
+
 
 %global pybasever 2.6
 %global pylibdir %{_libdir}/python%{pybasever}
@@ -889,6 +884,7 @@ ln -s python-debug %{buildroot}%{_bindir}/python2-debug
 %endif # with_debug_build
 %else
 mv %{buildroot}%{_bindir}/python %{buildroot}%{_bindir}/%{python}
+rm %{buildroot}%{_bindir}/python-config
 %if 0%{?with_debug_build}
 mv %{buildroot}%{_bindir}/python-debug %{buildroot}%{_bindir}/%{python}-debug
 %endif # with_debug_build
